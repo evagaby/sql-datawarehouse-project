@@ -1,0 +1,33 @@
+/*
+Esse script cria um banco de dados chamado 'DataWarehouse' depois de checar se ele ja existe. Se o banco de dados ja exixtir, ele apaga e recria um novo banco.
+nesse script tambem é criado très esquemas, bronze, silver e gold.
+
+ATENÇÃO
+Como foi mencionado anteriormente, esse script apaga e cria um novo banco de dados se ele ja exixtir, deletando permanentemente os dados. utilize com cuidado, 
+se certificado que haja backups dos dados caso seja rodado.
+
+This script creates a database called 'DataWarehouse' after checking if it already exists. If the database already exists, it deletes it and recreates a new database.
+In this script, three schemes are also created, bronze, silver and gold.
+
+ATTENTION
+As mentioned previously, this script deletes and creates a new database if it already exists, permanently deleting the data. use with care, 
+Make sure there are backups of the data if it is run.
+*/
+USE master;
+GO
+
+IF EXISTS(SELECT 1 FROM sys.databases WHERE NAME = 'DataWarehouse')
+BEGIN 
+	ALTER DATABASE DataWarehouse SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+	DROP DATABASE DataWarehouse;
+END;
+
+CREATE DATABASE DataWarehouse;
+
+USE DataWarehouse;
+
+CREATE SCHEMA bronze;
+GO
+CREATE SCHEMA silver;
+GO
+CREATE SCHEMA gold;
