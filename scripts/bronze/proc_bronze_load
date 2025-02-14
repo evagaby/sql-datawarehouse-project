@@ -4,6 +4,8 @@ This script loads data into the bronze schema from external CSV files.
 Performs: 
 - Truncate tables before loading data
 - Use  'BULK INSERT' command to load data from csv files
+Atention:
+* this stored procedure does not acecpt any parameters or return any values.
 */
 
 CREATE OR ALTER PROCEDURE bronze.load_bronze AS 
